@@ -19,5 +19,8 @@
   "homepage": "https://github.com/tomsdoo/electronade-mongodbclient#readme",
   "devDependencies": {
     "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "@tomsd/mongodbclient": "^3.0.7"
   }
 }
