@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/tomsdoo/electronade-mongodbclient/issues"
   },
-  "homepage": "https://github.com/tomsdoo/electronade-mongodbclient#readme"
+  "homepage": "https://github.com/tomsdoo/electronade-mongodbclient#readme",
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
 }
