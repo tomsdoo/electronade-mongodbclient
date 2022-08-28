@@ -60,4 +60,37 @@ describe("preloadObject", () => {
     mocked.verify();
     mocked.restore();
   });
+
+  it("mongodbclient.read exists", () => {
+    assert(preloadObject.mongodbclient.read);
+  });
+
+  it("mongodbclient.read calling", async () => {
+    const [
+      mockedValue
+    ] = [
+      [
+        { _id: "test id 1", value: "test1" },
+        { _id: "test id 2", value: "test2" }
+      ]
+    ];
+    const mocked = mock(ipcRenderer);
+    mocked
+      .expects("invoke")
+      .once()
+      .withArgs(
+        "electronade-mongodbclient:read",
+        { uri, db, collection, condition: undefined }
+      )
+      .returns(Promise.resolve(mockedValue));
+
+    assert.equal(
+      await eval(preloadObject.mongodbclient.read.toString())
+        (uri, db, collection)
+        .then((result: any) => JSON.stringify(result)),
+      JSON.stringify(mockedValue)
+    );
+    mocked.verify();
+    mocked.restore();
+  });
 });

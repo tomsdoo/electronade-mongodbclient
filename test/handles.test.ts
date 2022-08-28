@@ -23,4 +23,10 @@ describe("handles", () => {
       "electronade-mongodbclient:insertmany" in handleStore
     );
   });
+
+  it("electronade-mongodbclient:read eventName exists", () => {
+    assert(
+      "electronade-mongodbclient:read" in handleStore
+    );
+  });
 });
