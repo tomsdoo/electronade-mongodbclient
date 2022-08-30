@@ -93,4 +93,36 @@ describe("preloadObject", () => {
     mocked.verify();
     mocked.restore();
   });
+
+  it("mongodbclient.upsert exists", () => {
+    assert(preloadObject.mongodbclient.upsert);
+  });
+
+  it("mongodbclient.upsert calling", async () => {
+    const item = { name: "test" };
+    const mockedValue = {
+      ...item,
+      _id: "test id"
+    };
+
+    const mocked = mock(ipcRenderer);
+    mocked
+      .expects("invoke")
+      .once()
+      .withArgs(
+        "electronade-mongodbclient:upsert",
+        { uri, db, collection, item }
+      )
+      .returns(Promise.resolve(mockedValue));
+
+      assert.equal(
+        await eval(preloadObject.mongodbclient.upsert.toString())
+          (uri, db, collection, item)
+          .then((result: any) => JSON.stringify(result)),
+        JSON.stringify(mockedValue)
+      );
+
+      mocked.verify();
+      mocked.restore();
+  });
 });
