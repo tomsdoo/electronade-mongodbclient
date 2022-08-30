@@ -35,6 +35,23 @@ export const handles = [
         condition?: any;
       }
     ) => new MClient(uri, db, collection).read(condition)
+  },
+  {
+    eventName: "electronade-mongodbclient:upsert",
+    handler: (
+      event: any,
+      {
+        uri,
+        db,
+        collection,
+        item
+      }: {
+        uri: string;
+        db: string;
+        collection: string;
+        item: object;
+      }
+    ) => new MClient(uri, db, collection).upsert(item)
   }
 ];
 
@@ -57,6 +74,15 @@ export const preloadObject = {
     ) => ipcRenderer.invoke(
       "electronade-mongodbclient:read",
       { uri, db, collection, condition }
+    ),
+    upsert: (
+      uri: string,
+      db: string,
+      collection: string,
+      item: object
+    ) => ipcRenderer.invoke(
+      "electronade-mongodbclient:upsert",
+      { uri, db, collection, item }
     )
   }
 };
