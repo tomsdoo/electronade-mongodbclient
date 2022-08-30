@@ -29,4 +29,10 @@ describe("handles", () => {
       "electronade-mongodbclient:read" in handleStore
     );
   });
+
+  it("electronade-mongodbclient:upsert eventName exists", () => {
+    assert(
+      "electronade-mongodbclient:upsert" in handleStore
+    );
+  });
 });
