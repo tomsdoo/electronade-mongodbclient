@@ -41,4 +41,12 @@ describe("preload to handles", () => {
         in handleStore
     );
   });
+
+  it("electronade-mongodbclient:upsert", async () => {
+    assert(
+      await eval(preloadObject.mongodbclient.upsert.toString())
+        (uri, db, collection, { some: "thing" })
+        in handleStore
+    );
+  });
 });
