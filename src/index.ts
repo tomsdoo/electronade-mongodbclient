@@ -49,6 +49,18 @@ export const handles = [
         condition: any;
       }
     ) => new MClient(uri, db, collection).remove(condition)
+  },
+  {
+    eventName: "electronade-mongodbcliekt:count",
+    handler: (
+      event: any,
+      { uri, db, collection, condition }: {
+        uri: string;
+        db: string;
+        collection: string;
+        condition?: any;
+      }
+    ) => new MClient(uri, db, collection).count(condition)
   }
 ];
 
