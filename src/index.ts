@@ -52,6 +52,23 @@ export const handles = [
         item: object;
       }
     ) => new MClient(uri, db, collection).upsert(item)
+  },
+  {
+    eventName: "electronade-mongodbclient:remove",
+    handler: (
+      event: any,
+      {
+        uri,
+        db,
+        collection,
+        condition
+      }: {
+        uri: string;
+        db: string;
+        collection: string;
+        condition: any;
+      }
+    ) => new MClient(uri, db, collection).remove(condition)
   }
 ];
 
