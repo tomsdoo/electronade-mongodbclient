@@ -29,6 +29,12 @@ electronade: {
       collection: string,
       item: object
     ) => Promise<any>;
+    remove: (
+      uri: string,
+      db: string,
+      collection: string,
+      condition: any
+    ) => Promise<any>;
   }
 }
 ```
@@ -76,4 +82,15 @@ console.log(
     .then(({ name }) => name)
 ); // test3
 
+
+console.log(
+  await electronade.mongodbclient
+    .remove(
+      uri,
+      db,
+      collection,
+      { name: "test3" }
+    )
+    .then(({ deletedCount }) => deletedCount)
+); // 1
 ```
