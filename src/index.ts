@@ -101,6 +101,15 @@ export const preloadObject = {
     ) => ipcRenderer.invoke(
       "electronade-mongodbclient:remove",
       { uri, db, collection, condition }
+    ),
+    count: (
+      uri: string,
+      db: string,
+      collection: string,
+      condition?: any
+    ) => ipcRenderer.invoke(
+      "electronade-mongodbclient:count",
+      { uri, db, collection, condition }
     )
   }
 };
