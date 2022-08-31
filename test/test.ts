@@ -49,4 +49,12 @@ describe("preload to handles", () => {
         in handleStore
     );
   });
+
+  it("electronade-mongodbclient:remove", async () => {
+    assert(
+      await eval(preloadObject.mongodbclient.remove.toString())
+        (uri, db, collection, { name: "test" })
+        in handleStore
+    );
+  });
 });

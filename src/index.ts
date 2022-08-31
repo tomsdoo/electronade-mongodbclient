@@ -52,6 +52,23 @@ export const handles = [
         item: object;
       }
     ) => new MClient(uri, db, collection).upsert(item)
+  },
+  {
+    eventName: "electronade-mongodbclient:remove",
+    handler: (
+      event: any,
+      {
+        uri,
+        db,
+        collection,
+        condition
+      }: {
+        uri: string;
+        db: string;
+        collection: string;
+        condition: any;
+      }
+    ) => new MClient(uri, db, collection).remove(condition)
   }
 ];
 
@@ -83,6 +100,15 @@ export const preloadObject = {
     ) => ipcRenderer.invoke(
       "electronade-mongodbclient:upsert",
       { uri, db, collection, item }
+    ),
+    remove: (
+      uri: string,
+      db: string,
+      collection: string,
+      condition: any
+    ) => ipcRenderer.invoke(
+      "electronade-mongodbclient:remove",
+      { uri, db, collection, condition }
     )
   }
 };
