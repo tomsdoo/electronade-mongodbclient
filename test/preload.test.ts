@@ -125,4 +125,32 @@ describe("preloadObject", () => {
       mocked.verify();
       mocked.restore();
   });
+
+  it("mongodbclient.remove exists", () => {
+    assert(preloadObject.mongodbclient.remove);
+  });
+
+  it("mongodbclient.remove calling", async () => {
+    const condition = { name: "test" };
+    const mockedValue = { deletedCount: 1 };
+    const mocked = mock(ipcRenderer);
+    mocked
+      .expects("invoke")
+      .once()
+      .withArgs(
+        "electronade-mongodbclient:remove",
+        { uri, db, collection, condition }
+      )
+      .returns(Promise.resolve(mockedValue));
+
+    assert.equal(
+      await eval(preloadObject.mongodbclient.remove.toString())
+        (uri, db, collection, condition)
+        .then(({ deletedCount }: { deletedCount: number; }) => deletedCount),
+      1
+    );
+
+    mocked.verify();
+    mocked.restore();
+  });
 });
