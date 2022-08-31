@@ -6,12 +6,7 @@ export const handles = [
     eventName: "electronade-mongodbclient:insertmany",
     handler: (
       event: any,
-      {
-        uri,
-        db,
-        collection,
-        items
-      }: {
+      { uri, db, collection, items }: {
         uri: string;
         db: string;
         collection: string;
@@ -23,12 +18,7 @@ export const handles = [
     eventName: "electronade-mongodbclient:read",
     handler: (
       event: any,
-      {
-        uri,
-        db,
-        collection,
-        condition
-      }: {
+      { uri, db, collection, condition }: {
         uri: string;
         db: string;
         collection: string;
@@ -40,12 +30,7 @@ export const handles = [
     eventName: "electronade-mongodbclient:upsert",
     handler: (
       event: any,
-      {
-        uri,
-        db,
-        collection,
-        item
-      }: {
+      { uri, db, collection, item }: {
         uri: string;
         db: string;
         collection: string;
@@ -57,12 +42,7 @@ export const handles = [
     eventName: "electronade-mongodbclient:remove",
     handler: (
       event: any,
-      {
-        uri,
-        db,
-        collection,
-        condition
-      }: {
+      { uri, db, collection, condition }: {
         uri: string;
         db: string;
         collection: string;
