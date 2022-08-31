@@ -100,6 +100,15 @@ export const preloadObject = {
     ) => ipcRenderer.invoke(
       "electronade-mongodbclient:upsert",
       { uri, db, collection, item }
+    ),
+    remove: (
+      uri: string,
+      db: string,
+      collection: string,
+      condition: any
+    ) => ipcRenderer.invoke(
+      "electronade-mongodbclient:remove",
+      { uri, db, collection, condition }
     )
   }
 };
