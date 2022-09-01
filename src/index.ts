@@ -61,6 +61,19 @@ export const handles = [
         condition?: any;
       }
     ) => new MClient(uri, db, collection).count(condition)
+  },
+  {
+    eventName: "electronade-mongodbclient:distinct",
+    handler: (
+      event: any,
+      { uri, db, collection, key, condition }: {
+        uri: string;
+        db: string;
+        collection: string;
+        key: string;
+        condition?: any;
+      }
+    ) => new MClient(uri, db, collection).distinct(key, condition)
   }
 ];
 
