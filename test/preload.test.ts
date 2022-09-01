@@ -153,4 +153,31 @@ describe("preloadObject", () => {
     mocked.verify();
     mocked.restore();
   });
+
+  it("mongodbclient.count exists", () => {
+    assert(preloadObject.mongodbclient.count);
+  });
+
+  it("mongodbclient.count calling", async () => {
+    const condition = { name: "test" };
+    const mockedValue = 1;
+    const mocked = mock(ipcRenderer);
+    mocked
+      .expects("invoke")
+      .once()
+      .withArgs(
+        "electronade-mongodbclient:count",
+        { uri, db, collection, condition }
+      )
+      .returns(Promise.resolve(mockedValue));
+
+    assert.equal(
+      await eval(preloadObject.mongodbclient.count.toString())
+        (uri, db, collection, condition),
+      mockedValue
+    );
+
+    mocked.verify();
+    mocked.restore();
+  });
 });
