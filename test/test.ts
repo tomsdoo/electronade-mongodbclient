@@ -65,4 +65,12 @@ describe("preload to handles", () => {
         in handleStore
     );
   });
+
+  it("electronade-mongodbclient:distinct", async () => {
+    assert(
+      await eval(preloadObject.mongodbclient.distinct.toString())
+        (uri, db, collection, "name")
+        in handleStore
+    );
+  });
 });
