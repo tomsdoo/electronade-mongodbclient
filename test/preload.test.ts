@@ -180,4 +180,28 @@ describe("preloadObject", () => {
     mocked.verify();
     mocked.restore();
   });
+
+  it("mongodbclient.distinct exists", () => {
+    assert(preloadObject.mongodbclient.distinct);
+  });
+
+  it("mongodbclient.distinct calling", async () => {
+    const mockedValue = ["test1", "test2"];
+    const mocked = mock(ipcRenderer);
+    mocked
+      .expects("invoke")
+      .once()
+      .withArgs(
+        "electronade-mongodbclient:distinct",
+        { uri, db, collection, key: "name", condition: undefined }
+      )
+      .returns(Promise.resolve(mockedValue));
+
+      assert.equal(
+        await eval(preloadObject.mongodbclient.distinct.toString())
+          (uri, db, collection, "name")
+          .then((result: any) => JSON.stringify(result)),
+        JSON.stringify(mockedValue)
+      );
+  });
 });
