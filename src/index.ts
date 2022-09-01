@@ -123,6 +123,16 @@ export const preloadObject = {
     ) => ipcRenderer.invoke(
       "electronade-mongodbclient:count",
       { uri, db, collection, condition }
+    ),
+    distinct: (
+      uri: string,
+      db: string,
+      collection: string,
+      key: string,
+      condition?: any
+    ) => ipcRenderer.invoke(
+      "electronade-mongodbclient:distinct",
+      { uri, db, collection, key, condition }
     )
   }
 };
