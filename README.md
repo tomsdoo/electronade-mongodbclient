@@ -41,6 +41,13 @@ electronade: {
       collection: string,
       condition?: any
     ) => Promise<number>;
+    distinct: (
+      uri: string,
+      db: string,
+      collection: string,
+      key: string,
+      condition ?: any
+    ) => Promise<any>;
   }
 }
 ```
@@ -108,4 +115,14 @@ console.log(
     )
     .then(({ deletedCount }) => deletedCount)
 ); // 1
+
+console.log(
+  await electronade.mongodbclient
+    .distinct(
+      uri,
+      db,
+      collection,
+      "name"
+    )
+); // [ "test1", "test2" ]
 ```
