@@ -47,4 +47,10 @@ describe("handles", () => {
       "electronade-mongodbclient:count" in handleStore
     );
   });
+
+  it("electronade-mongodbclient:distinct eventName exists", () => {
+    assert(
+      "electronade-mongodbclient:distinct" in handleStore
+    );
+  });
 });
