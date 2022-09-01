@@ -57,4 +57,12 @@ describe("preload to handles", () => {
         in handleStore
     );
   });
+
+  it("electronade-mongodbclient:count", async () => {
+    assert(
+      await eval(preloadObject.mongodbclient.count.toString())
+        (uri, db, collection, { some: "thing" })
+        in handleStore
+    );
+  });
 });

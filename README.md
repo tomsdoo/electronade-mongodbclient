@@ -35,6 +35,12 @@ electronade: {
       collection: string,
       condition: any
     ) => Promise<any>;
+    count: (
+      uri: string,
+      db: string,
+      collection: string,
+      condition?: any
+    ) => Promise<number>;
   }
 }
 ```
@@ -82,6 +88,15 @@ console.log(
     .then(({ name }) => name)
 ); // test3
 
+console.log(
+  await electronade.mongodbclient
+    .count(
+      uri,
+      db,
+      collection,
+      { name: "test3" }
+    )
+); // 1
 
 console.log(
   await electronade.mongodbclient

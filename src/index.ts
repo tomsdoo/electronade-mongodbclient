@@ -49,6 +49,18 @@ export const handles = [
         condition: any;
       }
     ) => new MClient(uri, db, collection).remove(condition)
+  },
+  {
+    eventName: "electronade-mongodbclient:count",
+    handler: (
+      event: any,
+      { uri, db, collection, condition }: {
+        uri: string;
+        db: string;
+        collection: string;
+        condition?: any;
+      }
+    ) => new MClient(uri, db, collection).count(condition)
   }
 ];
 
@@ -88,6 +100,15 @@ export const preloadObject = {
       condition: any
     ) => ipcRenderer.invoke(
       "electronade-mongodbclient:remove",
+      { uri, db, collection, condition }
+    ),
+    count: (
+      uri: string,
+      db: string,
+      collection: string,
+      condition?: any
+    ) => ipcRenderer.invoke(
+      "electronade-mongodbclient:count",
       { uri, db, collection, condition }
     )
   }
