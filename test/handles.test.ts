@@ -41,4 +41,10 @@ describe("handles", () => {
       "electronade-mongodbclient:remove" in handleStore
     );
   });
+
+  it("electronade-mongodbclient:count eventName exists", () => {
+    assert(
+      "electronade-mongodbclient:count" in handleStore
+    );
+  });
 });
