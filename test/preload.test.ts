@@ -7,7 +7,7 @@ import { preloadObject } from "../src/";
 const ipcRenderer: {
   invoke: (eventName: string, ...args: any[]) => Promise<any>;
 } = {
-  invoke: (eventName: string) => Promise.resolve(eventName)
+  invoke: (eventName: string) => Promise.resolve(eventName),
 };
 
 let uri: string;
@@ -17,8 +17,7 @@ let collection: string;
 describe("preloadObject", () => {
   before(() => {
     uri = "dummy uri";
-    db = "db name",
-    collection = "collection name";
+    (db = "db name"), (collection = "collection name");
   });
 
   it("preloadObject is exported", () => {
@@ -34,27 +33,29 @@ describe("preloadObject", () => {
   });
 
   it("mongodbclient.insertMany calling", async () => {
-    const [
-      items,
-      mockedValue
-    ] = [
+    const [items, mockedValue] = [
       [{ name: "test1" }, { name: "test2" }],
-      { insertedCount: 2 }
+      { insertedCount: 2 },
     ];
     const mocked = mock(ipcRenderer);
     mocked
       .expects("invoke")
       .once()
-      .withArgs(
-        "electronade-mongodbclient:insertmany",
-        { uri, db, collection, items }
-      )
+      .withArgs("electronade-mongodbclient:insertmany", {
+        uri,
+        db,
+        collection,
+        items,
+      })
       .returns(Promise.resolve(mockedValue));
 
     assert.equal(
-      await eval(preloadObject.mongodbclient.insertMany.toString())
-        (uri, db, collection, items)
-        .then((result: any) => JSON.stringify(result)),
+      await eval(preloadObject.mongodbclient.insertMany.toString())(
+        uri,
+        db,
+        collection,
+        items
+      ).then((result: any) => JSON.stringify(result)),
       JSON.stringify(mockedValue)
     );
     mocked.verify();
@@ -66,28 +67,30 @@ describe("preloadObject", () => {
   });
 
   it("mongodbclient.read calling", async () => {
-    const [
-      mockedValue
-    ] = [
+    const [mockedValue] = [
       [
         { _id: "test id 1", value: "test1" },
-        { _id: "test id 2", value: "test2" }
-      ]
+        { _id: "test id 2", value: "test2" },
+      ],
     ];
     const mocked = mock(ipcRenderer);
     mocked
       .expects("invoke")
       .once()
-      .withArgs(
-        "electronade-mongodbclient:read",
-        { uri, db, collection, condition: undefined }
-      )
+      .withArgs("electronade-mongodbclient:read", {
+        uri,
+        db,
+        collection,
+        condition: undefined,
+      })
       .returns(Promise.resolve(mockedValue));
 
     assert.equal(
-      await eval(preloadObject.mongodbclient.read.toString())
-        (uri, db, collection)
-        .then((result: any) => JSON.stringify(result)),
+      await eval(preloadObject.mongodbclient.read.toString())(
+        uri,
+        db,
+        collection
+      ).then((result: any) => JSON.stringify(result)),
       JSON.stringify(mockedValue)
     );
     mocked.verify();
@@ -102,28 +105,33 @@ describe("preloadObject", () => {
     const item = { name: "test" };
     const mockedValue = {
       ...item,
-      _id: "test id"
+      _id: "test id",
     };
 
     const mocked = mock(ipcRenderer);
     mocked
       .expects("invoke")
       .once()
-      .withArgs(
-        "electronade-mongodbclient:upsert",
-        { uri, db, collection, item }
-      )
+      .withArgs("electronade-mongodbclient:upsert", {
+        uri,
+        db,
+        collection,
+        item,
+      })
       .returns(Promise.resolve(mockedValue));
 
-      assert.equal(
-        await eval(preloadObject.mongodbclient.upsert.toString())
-          (uri, db, collection, item)
-          .then((result: any) => JSON.stringify(result)),
-        JSON.stringify(mockedValue)
-      );
+    assert.equal(
+      await eval(preloadObject.mongodbclient.upsert.toString())(
+        uri,
+        db,
+        collection,
+        item
+      ).then((result: any) => JSON.stringify(result)),
+      JSON.stringify(mockedValue)
+    );
 
-      mocked.verify();
-      mocked.restore();
+    mocked.verify();
+    mocked.restore();
   });
 
   it("mongodbclient.remove exists", () => {
@@ -137,16 +145,21 @@ describe("preloadObject", () => {
     mocked
       .expects("invoke")
       .once()
-      .withArgs(
-        "electronade-mongodbclient:remove",
-        { uri, db, collection, condition }
-      )
+      .withArgs("electronade-mongodbclient:remove", {
+        uri,
+        db,
+        collection,
+        condition,
+      })
       .returns(Promise.resolve(mockedValue));
 
     assert.equal(
-      await eval(preloadObject.mongodbclient.remove.toString())
-        (uri, db, collection, condition)
-        .then(({ deletedCount }: { deletedCount: number; }) => deletedCount),
+      await eval(preloadObject.mongodbclient.remove.toString())(
+        uri,
+        db,
+        collection,
+        condition
+      ).then(({ deletedCount }: { deletedCount: number }) => deletedCount),
       1
     );
 
@@ -165,15 +178,21 @@ describe("preloadObject", () => {
     mocked
       .expects("invoke")
       .once()
-      .withArgs(
-        "electronade-mongodbclient:count",
-        { uri, db, collection, condition }
-      )
+      .withArgs("electronade-mongodbclient:count", {
+        uri,
+        db,
+        collection,
+        condition,
+      })
       .returns(Promise.resolve(mockedValue));
 
     assert.equal(
-      await eval(preloadObject.mongodbclient.count.toString())
-        (uri, db, collection, condition),
+      await eval(preloadObject.mongodbclient.count.toString())(
+        uri,
+        db,
+        collection,
+        condition
+      ),
       mockedValue
     );
 
@@ -191,17 +210,23 @@ describe("preloadObject", () => {
     mocked
       .expects("invoke")
       .once()
-      .withArgs(
-        "electronade-mongodbclient:distinct",
-        { uri, db, collection, key: "name", condition: undefined }
-      )
+      .withArgs("electronade-mongodbclient:distinct", {
+        uri,
+        db,
+        collection,
+        key: "name",
+        condition: undefined,
+      })
       .returns(Promise.resolve(mockedValue));
 
-      assert.equal(
-        await eval(preloadObject.mongodbclient.distinct.toString())
-          (uri, db, collection, "name")
-          .then((result: any) => JSON.stringify(result)),
-        JSON.stringify(mockedValue)
-      );
+    assert.equal(
+      await eval(preloadObject.mongodbclient.distinct.toString())(
+        uri,
+        db,
+        collection,
+        "name"
+      ).then((result: any) => JSON.stringify(result)),
+      JSON.stringify(mockedValue)
+    );
   });
 });
