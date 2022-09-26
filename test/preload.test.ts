@@ -7,7 +7,7 @@ import { preloadObject } from "../src/";
 const ipcRenderer: {
   invoke: (eventName: string, ...args: any[]) => Promise<any>;
 } = {
-  invoke: (eventName: string) => Promise.resolve(eventName),
+  invoke: async (eventName: string) => await Promise.resolve(eventName),
 };
 
 let uri: string;
@@ -17,7 +17,8 @@ let collection: string;
 describe("preloadObject", () => {
   before(() => {
     uri = "dummy uri";
-    (db = "db name"), (collection = "collection name");
+    db = "db name";
+    collection = "collection name";
   });
 
   it("preloadObject is exported", () => {
@@ -50,6 +51,7 @@ describe("preloadObject", () => {
       .returns(Promise.resolve(mockedValue));
 
     assert.equal(
+      // eslint-disable-next-line no-eval
       await eval(preloadObject.mongodbclient.insertMany.toString())(
         uri,
         db,
@@ -86,6 +88,7 @@ describe("preloadObject", () => {
       .returns(Promise.resolve(mockedValue));
 
     assert.equal(
+      // eslint-disable-next-line no-eval
       await eval(preloadObject.mongodbclient.read.toString())(
         uri,
         db,
@@ -121,6 +124,7 @@ describe("preloadObject", () => {
       .returns(Promise.resolve(mockedValue));
 
     assert.equal(
+      // eslint-disable-next-line no-eval
       await eval(preloadObject.mongodbclient.upsert.toString())(
         uri,
         db,
@@ -154,6 +158,7 @@ describe("preloadObject", () => {
       .returns(Promise.resolve(mockedValue));
 
     assert.equal(
+      // eslint-disable-next-line no-eval
       await eval(preloadObject.mongodbclient.remove.toString())(
         uri,
         db,
@@ -187,6 +192,7 @@ describe("preloadObject", () => {
       .returns(Promise.resolve(mockedValue));
 
     assert.equal(
+      // eslint-disable-next-line no-eval
       await eval(preloadObject.mongodbclient.count.toString())(
         uri,
         db,
@@ -220,6 +226,7 @@ describe("preloadObject", () => {
       .returns(Promise.resolve(mockedValue));
 
     assert.equal(
+      // eslint-disable-next-line no-eval
       await eval(preloadObject.mongodbclient.distinct.toString())(
         uri,
         db,

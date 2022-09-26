@@ -3,10 +3,11 @@ import { strict as assert } from "assert";
 
 import { handles, preloadObject } from "../src/";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ipcRenderer: {
   invoke: (eventName: string, ...args: any[]) => Promise<any>;
 } = {
-  invoke: (eventName: string) => Promise.resolve(eventName),
+  invoke: async (eventName: string) => await Promise.resolve(eventName),
 };
 
 let uri: string;
@@ -28,6 +29,7 @@ describe("preload to handles", () => {
 
   it("electronade-mongodbclient:insertmany", async () => {
     assert(
+      // eslint-disable-next-line no-eval
       (await eval(preloadObject.mongodbclient.insertMany.toString())(
         uri,
         db,
@@ -39,6 +41,7 @@ describe("preload to handles", () => {
 
   it("electronade-mongodbclient:read", async () => {
     assert(
+      // eslint-disable-next-line no-eval
       (await eval(preloadObject.mongodbclient.read.toString())(
         uri,
         db,
@@ -49,6 +52,7 @@ describe("preload to handles", () => {
 
   it("electronade-mongodbclient:upsert", async () => {
     assert(
+      // eslint-disable-next-line no-eval
       (await eval(preloadObject.mongodbclient.upsert.toString())(
         uri,
         db,
@@ -60,6 +64,7 @@ describe("preload to handles", () => {
 
   it("electronade-mongodbclient:remove", async () => {
     assert(
+      // eslint-disable-next-line no-eval
       (await eval(preloadObject.mongodbclient.remove.toString())(
         uri,
         db,
@@ -71,6 +76,7 @@ describe("preload to handles", () => {
 
   it("electronade-mongodbclient:count", async () => {
     assert(
+      // eslint-disable-next-line no-eval
       (await eval(preloadObject.mongodbclient.count.toString())(
         uri,
         db,
@@ -82,6 +88,7 @@ describe("preload to handles", () => {
 
   it("electronade-mongodbclient:distinct", async () => {
     assert(
+      // eslint-disable-next-line no-eval
       (await eval(preloadObject.mongodbclient.distinct.toString())(
         uri,
         db,
