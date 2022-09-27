@@ -123,7 +123,12 @@ export const preloadObject = {
         collection,
         items,
       }),
-    read: async (uri: string, db: string, collection: string, condition?: any) =>
+    read: async (
+      uri: string,
+      db: string,
+      collection: string,
+      condition?: any
+    ) =>
       await ipcRenderer.invoke("electronade-mongodbclient:read", {
         uri,
         db,
@@ -137,14 +142,24 @@ export const preloadObject = {
         collection,
         item,
       }),
-    remove: async (uri: string, db: string, collection: string, condition: any) =>
+    remove: async (
+      uri: string,
+      db: string,
+      collection: string,
+      condition: any
+    ) =>
       await ipcRenderer.invoke("electronade-mongodbclient:remove", {
         uri,
         db,
         collection,
         condition,
       }),
-    count: async (uri: string, db: string, collection: string, condition?: any) =>
+    count: async (
+      uri: string,
+      db: string,
+      collection: string,
+      condition?: any
+    ) =>
       await ipcRenderer.invoke("electronade-mongodbclient:count", {
         uri,
         db,
