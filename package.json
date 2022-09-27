@@ -1,8 +1,10 @@
 {
   "name": "electronade-mongodbclient",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "It's an npm package that provides mongodb client feature for electronade.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "scripts": {
     "build": "tsc --project tsconfig.cjs.json && tsc --project tsconfig.esm.json",
     "format": "npm run format:src && npm run format:test && npm run format:document",
@@ -32,7 +34,7 @@
     "type": "git",
     "url": "git+https://github.com/tomsdoo/electronade-mongodbclient.git"
   },
-  "keywords": [],
+  "keywords": ["electronade"],
   "author": "tom",
   "license": "MIT",
   "bugs": {
