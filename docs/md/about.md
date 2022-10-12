@@ -10,6 +10,8 @@ This package uses [@tomsd/mongodbclient](https://mongodbclient.netlify.app/) int
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/electronade-mongodbclient)
 ![Maintenance](https://img.shields.io/maintenance/yes/2022)
 
+[![](https://nodei.co/npm/electronade-mongodbclient.svg?mini=true)](https://www.npmjs.com/package/electronade-mongodbclient)
+
 ## install
 
 ``` shell
